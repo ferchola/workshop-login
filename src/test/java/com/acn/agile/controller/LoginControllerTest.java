@@ -8,7 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.when;
@@ -28,11 +27,11 @@ public class LoginControllerTest {
     @Test
     public void shouldShowUserDataWhenValidLogin() throws Exception {
         when(loginService.doLogin(anyString(), anyString()))
-                .thenReturn("Hello friend");
+                .thenReturn("Hello agile-division");
 
-        String loginResult = loginController.doLogin("myUser", "myPassword");
-        assertFalse("it should not show an error message",
-                loginResult.equals(ERROR_MSG));
+        String loginResult = loginController.doLogin("agile-division", "myPassword");
+        assertTrue("it should not show an error message",
+                loginResult.contains("HELLO"));
     }
 
     @Test
@@ -40,9 +39,9 @@ public class LoginControllerTest {
         when(loginService.doLogin(anyString(), anyString()))
                 .thenThrow(new LoginException());
 
-        String loginResult = loginController.doLogin("myUser", "myPassword");
-        assertTrue("it should not show an error message",
-                loginResult.equals(ERROR_MSG));
+        String loginResult = loginController.doLogin("agile-division", "myPassword");
+        assertTrue("it should show an error message",
+                loginResult.contains(ERROR_MSG));
     }
 
 }

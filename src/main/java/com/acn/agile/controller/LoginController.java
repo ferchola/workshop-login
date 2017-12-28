@@ -21,9 +21,9 @@ public class LoginController {
     @ApiOperation(value = "Logs in a user")
     public String doLogin(String userId, String password) {
         try {
-            return loginService.doLogin(userId, password);
+            return "HELLO ".concat(loginService.doLogin(userId, password));
         } catch (LoginException e) {
-            return ERROR_MSG;
+            return ERROR_MSG + " " + e.getMessage();
         }
     }
 

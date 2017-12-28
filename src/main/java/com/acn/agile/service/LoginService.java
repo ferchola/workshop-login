@@ -16,7 +16,10 @@ public class LoginService {
 
     public String doLogin(String userId, String password) throws LoginException{
         User user = userRepository.getUserByIdAndPass(userId, password);
-        return user != null ? "Hello ".concat(user.getFullName()) : INVALID_USER_MSG;
+        if (user == null) {
+            throw new LoginException();
+        }
+        return user.getFullName();
     }
 
     public boolean isUserRegistered(String userId) {
