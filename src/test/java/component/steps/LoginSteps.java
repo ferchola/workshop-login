@@ -1,8 +1,8 @@
 package component.steps;
 
 import com.acn.agile.controller.LoginController;
-import cucumber.api.PendingException;
-import cucumber.api.java.Before;
+import com.acn.agile.service.LoginService;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -15,8 +15,11 @@ public class LoginSteps {
     @Autowired
     LoginController loginController;
 
-    @Given("^un usuario ingresa a la app$")
-    public void navigateToAppUrl() throws Throwable{
+    @Autowired
+    LoginService loginService;
+
+    @Given("^el usuario (\\w+) ingresa a la app$")
+    public void navigateToAppUrl(String userId) throws Throwable{
         //The web driver would navigate to the web app
     }
 
@@ -34,5 +37,10 @@ public class LoginSteps {
     @Then("^la aplicacion muestra un mensaje de error$")
     public void checkRenderedErrorMsg() throws Throwable {
         //Selenium checks the rendered error message
+    }
+
+    @And("^el usuario (\\w+) esta registrado$")
+    public void checkRegisteredUser(String userId) throws Throwable {
+        loginService.isUserRegistered(userId);
     }
 }

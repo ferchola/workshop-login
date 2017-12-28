@@ -15,7 +15,11 @@ public class LoginService {
     private UserRepository userRepository;
 
     public String doLogin(String userId, String password) throws LoginException{
-        User user = userRepository.getUserById(userId, password);
+        User user = userRepository.getUserByIdAndPass(userId, password);
         return user != null ? "Hello ".concat(user.getFullName()) : INVALID_USER_MSG;
+    }
+
+    public boolean isUserRegistered(String userId) {
+        return userRepository.getUserById(userId);
     }
 }
